@@ -29,3 +29,28 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 To update vscode to use this font:
 update font as "Hack Nerd Font"
+
+# Add Cool Functionalities
+Let's install [warp](https://www.warp.dev) terminal. It comes with lots of cool features, autocompletion, warp ai etc.
+
+Install starship for good looking prompt.
+```sh
+curl -sS https://starship.rs/install.sh | sh
+```
+
+Add below in ~/.zshrc
+```
+eval "$(starship init zsh)"
+```
+
+Use predefined presets available [here](https://starship.rs/presets/)
+
+And use a preset as below:
+```sh
+starship preset gruvbox-rainbow -o ~/.config/starship.toml
+```
+
+Use [this](https://github.com/typecraft-dev/dotfiles/blob/master/starship.toml) toml file for catpuccin colour theme with starship.
+```sh
+curl https://raw.githubusercontent.com/typecraft-dev/dotfiles/master/starship.toml -o ~/.config/starship.toml            
+```
