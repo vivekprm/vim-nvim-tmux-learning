@@ -308,3 +308,302 @@ return {
     }  
 }
 ```
+
+# LSP Integration & Configuration
+LSP stands for Local Server Protocol, it's open json RPC standard that allows communication between text editors and language servers running 
+on our machine that give language intelligence feature. Originally this was developed by Microsoft for C# integration with Visual studio code.
+
+Mason is the Neovim plugin that installs and manages LSPs on our system.
+
+Let's create lsp-config.lua file in plugins directory with below content:
+```lua
+return {
+  "williamboman/mason.nvim",
+  config = function()
+    require("mason").setup()
+  end
+}
+```
+
+Now we have access to set of commands with prefix ```Mason```. If we type ```:Mason``` we see Mason UI with list of LSPs.
+
+We wiil be installing another package ```mason lspconfig```. It bridges the gap between ```mason``` and ```lspconfig``` plugin.
+It has ensure install functionality this tells neovim and it tells mason that we need to install these language servers before we do anything else.
+
+```lua
+return {
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls", "clangd", "gopls", "java_language_server", "tsserver"
+        }
+      })
+    end
+  }
+}
+```
+
+Look at [this](https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers) list of LSP servers available.
+We have installed the language server but Neovim is not hooked up to this Language server yet. For that we are going to install another plugin called [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+
+```lua
+return {
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls", "clangd", "gopls", "java_language_server", "tsserver"
+        }
+      })
+    end
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require("lspconfig")
+      lspconfig.lua_ls.setup({})
+      lspconfig.clangd.setup({})
+      lspconfig.gopls.setup({})
+      lspconfig.java_language_server.setup({})
+      lspconfig.tsserver.setup({})
+    end
+  }
+}
+```
+
+```:LspInfo``` command gives detail of Lsp connected to current buffer.
+
+To check what functionality Neovim gives to connect with language server is to look for the help docs as
+```:h vim.lsp.buf```
+
+And then we can setup some keymaps.
+
+```lua
+return {
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls", "clangd", "gopls", "java_language_server", "tsserver"
+        }
+      })
+    end
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require("lspconfig")
+      lspconfig.lua_ls.setup({})
+      lspconfig.clangd.setup({})
+      lspconfig.gopls.setup({})
+      lspconfig.java_language_server.setup({})
+      lspconfig.tsserver.setup({})
+
+      -- setup keymap
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+      vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+
+    end
+  }
+}
+```
+
+We can add more functionality by referring to that help documentation but it's much more easier to refer [sample config](https://github.com/neovim/nvim-lspconfig?tab=readme-ov-file#suggested-configuration).
+
+We can use ```LspAttach``` to attach these configurations when a LSP attachs to a buffer.
+
+We see that neovim complains about undefined variable vim. if we hit '<leader>ca' we can see suggested actions. We can install another plugin called telescope-ui-select, to show suggested actions in cool ui. Modify telescope plugin as below:
+
+```lua
+return {
+  {
+    'nvim-telescope/telescope.nvim', 
+    tag = '0.1.6', 
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+    end
+  },
+  {
+    'nvim-telescope/telescope-ui-select.nvim',
+    config = function()
+      -- This is your opts table
+      require("telescope").setup {
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {}
+          }
+        }
+      }
+      require("telescope").load_extension("ui-select")
+    end
+  }
+}
+```
+
+CTRL+x followed by CTRL+o autocompletes.
+
+# Linting & Formatting
+NULL-LS is an amazing plugin that essentially wraps commandline tools (such as Rubocop, EsLint, Black etc.) into a generalized LSP enabling easy communication between these tools and NeoVim's builtin client. So instead of installing different plugins for linting and formatting, we could just use NULL-LS to wrap our tools in a generalized language server. However, NULL-LS was deprecated. It ties very closely with NeoVim's internals leaving it open to breaking from changes within NeoVim.
+
+A great alternative has been created called [NONE-LS](https://github.com/nvimtools/none-ls.nvim) which is a community managed fork of NULL-LS.
+
+None-LS doesn't rewrite any of the variables of Null-ls, so we are going to be calling null-ls instead of none-ls.
+
+```lua
+return {
+  "nvimtools/none-ls.nvim",
+  config = function()
+    local null_ls = require("null-ls")
+    null_ls.setup({
+      sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+      },
+    })
+  end
+}
+```
+
+We can use Mason to install stylua by typing ```:Mason``` command, search (/ or ?) for stylua and press i to install.
+
+Final thing that we want is setup a keymap for lua formatting.
+
+```lua
+return {
+	"nvimtools/none-ls.nvim",
+	config = function()
+		local null_ls = require("null-ls")
+		null_ls.setup({
+			sources = {
+				null_ls.builtins.formatting.stylua,
+			},
+		})
+		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+	end,
+}
+```
+
+Let's add linter formatter for ruby. We are going to use [Rubocop](https://github.com/rubocop/rubocop)
+
+First let's configure treesitter for ruby.
+```lua
+return {
+  "nvim-treesitter/nvim-treesitter", 
+  build = ":TSUpdate",
+  config = function() 
+   local configs = require("nvim-treesitter.configs")
+   configs.setup({
+      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "css", "java", "go", "ruby" },
+      sync_install = false,
+      highlight = { enable = true },
+      indent = { enable = true },  
+    })
+
+    -- Keymaps for Treesitter
+    vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>', {})
+  end
+}
+```
+Instead of adding our language in ensure_installed section we can add another flag auto_install = true, which installs language support as we open a file which we haven't configured.
+
+Now let's go to none-ls configuration and add few entries.
+```lua
+return {
+	"nvimtools/none-ls.nvim",
+	config = function()
+		local null_ls = require("null-ls")
+		null_ls.setup({
+			sources = {
+				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.diagnostics.rubocop,
+				null_ls.builtins.formatting.rubocop,
+			},
+		})
+		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+	end,
+}
+```
+
+Now next thing is we go to Mason and install Rubocop.
+Now let's add eslint (eslint_d in mason) and prettier for javascript projects.
+We can use Black (formatter) and isort for python.
+
+# Autocompletion & Snippets
+nvim-cmp: This plugin is completion engine for NeoVim.
+luasnip: Snippet engine for NeoVim, written in lua.
+cmp-luanip: luasnip completion source for nvim-cmp. It's responsible for supplying nvim-cmp with list of possible snippets while we type.
+Friendly Snippets: Collection of vscode like snippets, loaded by luasnip.
+cmp-nvim-lsp: nvim-cmp source for neovim's builtin language server client. 
+
+Add new file completions.lua in plugin directory by clicking 'a' and add below content.
+```lua
+return {
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = {
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+    },
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      local cmp = require("cmp")
+      require("luasnip.loaders.from_vscode").lazy_load()
+      cmp.setup({
+        snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+          -- { name = "nvim_lsp" },
+          { name = "luasnip" }, -- For luasnip users.
+        }, {
+          { name = "buffer" },
+        }),
+      })
+    end,
+  },
+}
+```
+
