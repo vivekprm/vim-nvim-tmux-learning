@@ -606,4 +606,10 @@ return {
   },
 }
 ```
+# Neovim Dashboard
+```lua
+
+```
+
+# Autocomplete & Snippets
 
