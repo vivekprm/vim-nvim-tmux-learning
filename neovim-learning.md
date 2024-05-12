@@ -606,10 +606,123 @@ return {
   },
 }
 ```
-# Neovim Dashboard
-```lua
 
+Now we have main snippet functionality in our neovim now we can add more sources to our snippet completion configuration. The main one we want to add is [nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp). It's nvim-cmp source for neovim's built-in language server client.
+
+It reaches out to any LSPs attached in our current buffer and will ask it for completion recommendation. That LSP will give the recommendation and then cmp-lsp will also expand those completions. So we add another plugin as below:
+
+```lua
+return {
+	{
+"hrsh7th/cmp-nvim-lsp"
+		},
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = {
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+    },
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      local cmp = require("cmp")
+      require("luasnip.loaders.from_vscode").lazy_load()
+      cmp.setup({
+        snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+          -- { name = "nvim_lsp" },
+          { name = "luasnip" }, -- For luasnip users.
+        }, {
+          { name = "buffer" },
+        }),
+      })
+    end,
+  },
+}
 ```
 
-# Autocomplete & Snippets
+And add below line in our lsp-config.
+```lua
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+```
 
+```lsp-config.lua
+return {
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls", "clangd", "gopls", "java_language_server", "tsserver"
+        }
+      })
+    end
+  },
+  {
+    "neovim/nvim-lspconfig",
+    lazy = false,
+    config = function()
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local lspconfig = require("lspconfig")
+      lspconfig.lua_ls.setup({
+	capabilities = capabilities
+      })
+      lspconfig.clangd.setup({
+	capabilities = capabilities
+      })
+      lspconfig.gopls.setup({
+	capabilities = capabilities
+      })
+      lspconfig.java_language_server.setup({
+	capabilities = capabilities
+      })
+      lspconfig.tsserver.setup({
+	capabilities = capabilities
+      })
+
+      -- setup keymap
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+      vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+
+    end
+  }
+}
+```
+
+# Neovim Dashboard
+```lua
+return {
+    'goolord/alpha-nvim',
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        'nvim-lua/plenary.nvim'
+    },
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.theta'.config)
+    end
+};
+```
