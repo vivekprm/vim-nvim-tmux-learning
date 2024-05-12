@@ -741,4 +741,62 @@ return {
 	end
 }
 ```
+Next plugin we need to install is [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) and add it as dependency.
 
+```lua
+return {
+	"mfussenegger/nvim-dap",
+	dependencies = {
+		"rcarriga/nvim-dap-ui"
+	},
+	config = function()
+		local dap, dapui = require("dap"), require("dapui")
+		dap.listeners.before.attach.dapui_config = function()
+		  dapui.open()
+		end
+		dap.listeners.before.launch.dapui_config = function()
+		  dapui.open()
+		end
+		dap.listeners.before.event_terminated.dapui_config = function()
+		  dapui.close()
+		end
+		dap.listeners.before.event_exited.dapui_config = function()
+		  dapui.close()
+		end
+		vim.keymap.set('n', '<Leader>dt', dap.toggle_breakpoint, {})
+		vim.keymap.set('n', '<Leader>dc', dap.continue, {})
+	end
+}
+```
+
+Now we need to configure debug adapter. There is a [wiki](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation) dedicated to that only.
+For Go debugger setup we need to install delve & https://github.com/leoluz/nvim-dap-go.
+
+```lua
+return {
+	"mfussenegger/nvim-dap",
+	dependencies = {
+		"nvim-neotest/nvim-nio",
+		"rcarriga/nvim-dap-ui",
+		"leoluz/nvim-dap-go"
+	},
+	config = function()
+		local dap, dapui = require("dap"), require("dapui")
+		require("dap-go").setup()
+		require("dapui").setup()
+		dap.listeners.before.attach.dapui_config = function()
+		  dapui.open()
+		end
+		dap.listeners.before.launch.dapui_config = function()
+		  dapui.open()
+		end
+		dap.listeners.before.event_terminated.dapui_config = function()
+		  dapui.close()
+		end
+		dap.listeners.before.event_exited.dapui_config = function()
+		  dapui.close()
+		end
+		vim.keymap.set('n', '<Leader>dt', dap.toggle_breakpoint, {})
+		vim.keymap.set('n', '<Leader>dc', dap.continue, {})
+	end
+}
