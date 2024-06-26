@@ -729,7 +729,7 @@ return {
 # Configure Debuggers
 Debug adapter protocol has very similar story as Language Server Protocol. It's an open protocol which was developed by Microsoft for vscode.
 
-We need to install [nvim-dap](https://github.com/mfussenegger/nvim-dap) which is a dap client built for neovim. Add plugin file called debuggers.lua with below content:
+We need to install [nvim-dap](https://github.com/mfussenegger/nvim-dap) which is a dap client built for neovim. Refer [this](https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt) link for more config options. Add plugin file called debuggers.lua with below content:
 
 ```lua
 return {
