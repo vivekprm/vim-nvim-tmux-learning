@@ -800,6 +800,7 @@ return {
 		vim.keymap.set('n', '<Leader>dc', dap.continue, {})
 	end
 }
+```
 
 # GO Setup
 We will use below plugin:
