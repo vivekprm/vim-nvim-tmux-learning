@@ -105,6 +105,7 @@ set -g @dracula-show-left-icon session
 
 set -g status-position top
 ```
+Use the tpm install command: prefix + I (default prefix is ctrl+b), to install above plugins.
 
 # Make TMUX look beautiful
 
