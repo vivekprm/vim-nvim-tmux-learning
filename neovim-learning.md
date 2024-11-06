@@ -299,13 +299,11 @@ Create a new file called lualine.lua with below content.
 
 ```lua
 return {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    require('lualine').setup {
-      config = function()
-        options = { theme = 'dracula' }
-      end
-    }  
+    "nvim-lualine/lualine.nvim",
+    dependencies = {"nvim-tree/nvim-web-devicons", "catppuccin/nvim"},
+    config = function()
+        require("lualine").setup({options = {theme = "catppuccin"}})
+    end
 }
 ```
 
