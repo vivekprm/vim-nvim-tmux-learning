@@ -1,5 +1,7 @@
 Install neovim and run ```nvim``` command to start.
 
+- To close Neovim tab ```:bd```
+
 # Configure neovim
 Create init.lua file to configure Neovim
 
