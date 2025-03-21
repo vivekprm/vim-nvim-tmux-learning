@@ -1,6 +1,7 @@
 - H, J, K, L are used for navigation.
 - CTRl + r to redo.
 - Press CTRL+O in insert mode to run normal mode commands.
+- From insert mode press Ctrl+O, 0 beginning of line, Ctrl+O, $ end of line
 - To search for a word under our cursor press *
 - SHIFT+N to look for the previous match & N to go forward.
 - CIW to change the word under cursor. Then press n to go to the next match and press .
