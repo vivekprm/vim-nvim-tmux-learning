@@ -6,6 +6,7 @@
 - CIW to change the word under cursor. Then press n to go to the next match and press .
 - Another easier way to change all the occurrences of a word ```:%s/post/poops/g```, if we want confirmation before changing use ```:%s/post/poops/gc```
 - VIW visually highlight a word and take any action, e.g. press Y to yank. Go somewhere else in the file and press P to paste it.
+- To run any command from vim prefix it with ```:!<cmd>```
 
 # Registers
 In case we yanked mltiple times we can see all those using ```:reg``` command. It shows all the registers and their contents. These regsiters have all the actions that we perform. So to paste from register 3 we press ```"3P```. Similarly we can yank into specific register using ```"7Y```
