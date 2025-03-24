@@ -828,6 +828,8 @@ return {
 # Install lazygit for git integration
 Install [lazygit](https://github.com/jesseduffield/lazygit) and then [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim?tab=readme-ov-file) pluging using the package manager you are using with nvim. I am using lazy here:
 
+https://www.youtube.com/watch?v=CPLdltN7wgE
+
 ```lua
 -- nvim v0.8.0
 return {
@@ -852,3 +854,7 @@ return {
 }
 ```
 
+Staging files quickly: Use arrow key to choose files and hit space to add them for staging. 
+Commit: Press c for commiting and type commit message.
+Push: SHIFT+ P to push the changes.
+Pull: p to pull the changes.
