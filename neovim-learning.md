@@ -275,6 +275,8 @@ return {
 
 and neo-tree
 ```lua
+-- https://github.com/nvim-neo-tree/neo-tree.nvim/blob/main/doc/neo-tree.txt
+-- https://www.lazyvim.org/extras/editor/neo-tree
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -282,7 +284,22 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
-  }
+  },
+  opts = {
+    sources = { "filesystem", "buffers", "git_status" },
+    open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+    filesystem = {
+      bind_to_cwd = true,
+      follow_current_file = { enabled = true },
+      use_libuv_file_watcher = true,
+    }
+  },  
+  config = function(_, opts)
+    require("neo-tree").setup(opts)
+    vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>', {})
+    vim.keymap.set('n', '<C-g>', ':Neotree float git_status<CR>', {})
+    -- vim.keymap.set('n', '<C-/>', ':Neotree toggle current reveal_force_cwd<CR>', {})
+  end
 }
 ```
 
