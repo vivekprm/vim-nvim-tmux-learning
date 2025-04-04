@@ -296,6 +296,25 @@ vim.cmd("set shiftwidth=2")
 vim.g.mapleader = " "
 ```
 
+Modified ```init.lua``` file:
+```lua
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require("vim-options")
+local opts ={}
+require("lazy").setup("plugins", opts)
+```
+
 Now adding a new plugin is pretty easy. Let's try to add a new plugin called [lualine](https://github.com/nvim-lualine/lualine.nvim).
 Create a new file called lualine.lua with below content.
 
@@ -818,6 +837,7 @@ return {
   },
   config = function()
     require("go").setup()
+    vim.keymap.set('n', '<leader>gr', ':cd %:p:h <BAR> :GoRun -F<CR>', {})
   end,
   event = {"CmdlineEnter"},
   ft = {"go", 'gomod'},
