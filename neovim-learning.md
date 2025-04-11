@@ -304,6 +304,8 @@ return {
 }
 ```
 
+To hide file explorer in NeoTree press ```q```
+
 One last thing that we can do is move our vim settings to a separate file. Now add vim-options.lua file inside ~/.config/nvim/lua directory.
 
 ```lua
