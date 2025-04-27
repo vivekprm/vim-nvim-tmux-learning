@@ -865,7 +865,7 @@ return {
 }
 ```
 # Python Setup
-Istall pyright plugin through Mason and add below line in lspconfig:
+Istall pyright plugin through Mason  nd mypy and ruff for linting & fromatting and add below line in lspconfig:
 
 ```lua
 return {
@@ -884,6 +884,8 @@ return {
 					"clangd",
 					"gopls",
           				"pyright",
+					"mypy",
+					"ruff",
 					"ts_ls",
 				},
 			})
@@ -920,6 +922,26 @@ return {
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		end,
 	},
+}
+```
+
+Add below in none-ls.lua
+```lua
+return {
+	"nvimtools/none-ls.nvim",
+	config = function()
+		local null_ls = require("null-ls")
+		null_ls.setup({
+			sources = {
+				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.diagnostics.rubocop,
+				null_ls.builtins.formatting.rubocop,
+ 			        null_ls.builtins.diagnostics.mypy,
+        			null_ls.builtins.diagnostics.ruff,
+			},
+		})
+		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+	end,
 }
 ```
 
