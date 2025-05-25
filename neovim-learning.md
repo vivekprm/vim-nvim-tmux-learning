@@ -945,6 +945,18 @@ return {
 }
 ```
 
+# Rust Setup
+We need to install [rust-tools](https://github.com/simrat39/rust-tools.nvim) plugin
+We can use base configuration from [nvchad](https://nvchad.com). But here we are going to do it manually using lazyvim. We need to install ```rust-analyzer``` and ```codelldb``` mason plugins. Using
+```
+:MasonInstall rust-analyzer
+```
+With these plugins installed we will get code completion, inline errors, suggestions and debugging capabilities. But in order for plugins to work, we need to do some additional configuration.
+
+To make rust-analyzer work with neovim we need an additional plugin called, **[rustaceanvim](https://github.com/mrcjkb/rustaceanvim)** only works with nvim >= 0.11
+
+To setup debugger, edit nvim-dap.
+
 # Install lazygit for git integration
 Install [lazygit](https://github.com/jesseduffield/lazygit) and then [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim?tab=readme-ov-file) pluging using the package manager you are using with nvim. I am using lazy here:
 
@@ -978,3 +990,5 @@ Staging files quickly: Use arrow key to choose files and hit space to add them f
 Commit: Press c for commiting and type commit message.
 Push: SHIFT+ P to push the changes.
 Pull: p to pull the changes.
+
+# To remove all the plugins
