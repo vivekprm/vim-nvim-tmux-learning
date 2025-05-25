@@ -110,7 +110,7 @@ It has ```:TSUpdate``` command to update all the parsers. We can add below confi
 ```lua
 local configs = require("nvim-treesitter.configs")
 configs.setup({
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "css", "java", "go" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "css", "java", "go", "rust" },
     sync_install = false,
     highlight = { enable = true },
     indent = { enable = true },  
@@ -187,7 +187,7 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 -- Treesitter
 local configs = require("nvim-treesitter.configs")
 configs.setup({
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "css", "java", "go" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "css", "java", "go", "rust" },
     sync_install = false,
     highlight = { enable = true },
     indent = { enable = true },  
