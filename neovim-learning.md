@@ -382,7 +382,7 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "lua_ls", "clangd", "gopls", "java_language_server", "tsserver"
+          "lua_ls", "clangd", "gopls", "rust_analyzer", "java_language_server", "ts_ls"
         }
       })
     end
@@ -406,7 +406,7 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "lua_ls", "clangd", "gopls", "java_language_server", "tsserver"
+          "lua_ls", "clangd", "gopls", "pyright", "rust_analyzer", "java_language_server", "ts_ls"
         }
       })
     end
@@ -418,8 +418,10 @@ return {
       lspconfig.lua_ls.setup({})
       lspconfig.clangd.setup({})
       lspconfig.gopls.setup({})
+      lspconfig.pyright.setup({})
+      lspconfig.rust_analyzer.setup({})
       lspconfig.java_language_server.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.ts_la.setup({})
     end
   }
 }
