@@ -2,6 +2,7 @@ Install neovim and run ```nvim``` command to start.
 
 - To close Neovim tab ```:bd```
 - To switch between buffers ```<CTRL + 6>```
+- To go back to previous edit location ```<CTRL + O>```
 
 # Configure neovim
 Create init.lua file to configure Neovim
