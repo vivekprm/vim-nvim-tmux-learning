@@ -8,6 +8,7 @@
 - Another easier way to change all the occurrences of a word ```:%s/post/poops/g```, if we want confirmation before changing use ```:%s/post/poops/gc```
 - VIW visually highlight a word and take any action, e.g. press Y to yank. Go somewhere else in the file and press P to paste it.
 - To run any command from vim prefix it with ```:!<cmd>```
+- CTRL+D and CTRL+U to scroll half the page.
 - Un-commenting code:
   - Put your cursor on the first # character, press Ctrl + V, and go down until the last commented line and press x, that will delete all the # characters vertically.
 - Commenting code:
