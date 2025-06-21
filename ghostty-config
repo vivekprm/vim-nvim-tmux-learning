@@ -1,0 +1,7 @@
+font-size = 16
+font-family = "JetBrainsMono Nerd Font Medium"
+theme = catppuccin-mocha
+scrollback-limit = 30000
+working-directory = "~/go/src/github.com/vivekprm/"
+window-height=510
+window-width=1640
