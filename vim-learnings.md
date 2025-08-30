@@ -1,4 +1,7 @@
 - H, J, K, L are used for navigation.
+- w to move one word foward and lands at start of the word. e to move one word foward and lands at end of the word. b to move back. 5 + w to jump 5 words.
+- f followed by character to find. e.g. f + s finds the next s character we can hit ; to repeat it and go further , to go backward. Use F to search backward.
+  - 4+f+s will find fourth occurance.
 - CTRl + r to redo.
 - Press CTRL+O in insert mode to run normal mode commands.
 - From insert mode press Ctrl+O, 0 beginning of line, Ctrl+O, $ end of line
