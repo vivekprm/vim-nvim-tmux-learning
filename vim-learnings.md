@@ -1,12 +1,28 @@
+# Navigation
 - H, J, K, L are used for navigation.
 - w to move one word foward and lands at start of the word. e to move one word foward and lands at end of the word. b to move back. 5 + w to jump 5 words.
+- gg to go to start of the file. SHIFT + G to go to end of a file.
+- SHIFT + M to go to the middle section of visible screen.
+  - SHIFT + M followed by ZZ can be used to scroll the document.
+- Use [whichKey](https://github.com/folke/which-key.nvim) plugin to know which next keys are available.
+
+# Finding
 - f followed by character to find. e.g. f + s finds the next s character we can hit ; to repeat it and go further , to go backward. Use F to search backward.
   - 4+f+s will find fourth occurance.
+- To search for a word under our cursor press *.
+- SHIFT+N to look for the previous match & N to go forward.
+- Use % to move to matching pair of parantheses.
+
+# Editing
+- d + w deletes a word. But it cuts it so pressing p will paste it. SHIFT + P will paste previous. dd will delete the line.
+- y + w yanks a word. yy will copy the line. p will paste below, SHIFT + P will paste above.
 - CTRl + r to redo.
 - Press CTRL+O in insert mode to run normal mode commands.
+- d + i + w to delete in word and takes the entire word regardless of position. action + motion + range. E.g. d + i + p to delete in paragraph. y + i + p yank in paragraph.
+- Install [text objects plugin](https://github.com/kana/vim-textobj-function) to e.g. delete in function using d + i + f
+- d + a + w to delete around word.
+- c + i + ( change in parantheses. d + i + w to delete and cool thing is you don't have to be in the parantheses. Same works with ".
 - From insert mode press Ctrl+O, 0 beginning of line, Ctrl+O, $ end of line
-- To search for a word under our cursor press *
-- SHIFT+N to look for the previous match & N to go forward.
 - CIW to change the word under cursor. Then press n to go to the next match and press .
 - Another easier way to change all the occurrences of a word ```:%s/post/poops/g```, if we want confirmation before changing use ```:%s/post/poops/gc```
 - VIW visually highlight a word and take any action, e.g. press Y to yank. Go somewhere else in the file and press P to paste it.
@@ -20,7 +36,14 @@
   - Now press Shift + I, which will put the editor in INSERT mode and then press #. This will add a hash to the first line.
   - Then press Esc (give it a second), and it will insert a # character on all other selected lines.
 
+# Visual Mode
+- Press v for visual mode and then press w, w it keeps selecting, until you press closing operator e.g. d to delete the selection.
+- Press SHIFT + V t0 select the entire line. Press 6 + k to select 6 lines above, 6 + j to select 6 lines below and press d to delete. Or press 6 + D + K to do the same.
+- CTRL + V to select a visual block. And followed by e.g. > to indent.
 
+# Replace Mode
+- SHIFT + R is replace mode.
+  
 # Registers
 In case we yanked mltiple times we can see all those using ```:reg``` command. It shows all the registers and their contents. These regsiters have all the actions that we perform. So to paste from register 3 we press ```"3P```. Similarly we can yank into specific register using ```"7Y```
 
