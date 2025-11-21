@@ -8,6 +8,10 @@ https://vim-adventures.com
 - SHIFT + M to go to the middle section of visible screen.
   - SHIFT + M followed by ZZ can be used to scroll the document.
 - Use [whichKey](https://github.com/folke/which-key.nvim) plugin to know which next keys are available.
+- Use gg to go all the way up to a document. SHFT + g to go all the way down.
+- SHFT + M to move to middle of the visible screen.
+- zz to also scroll and stay in the middle fo visible screen.
+- Hitting % moves to the matching counter part of any brace.
 
 # Finding
 - f followed by character to find. e.g. f + s finds the next s character we can hit ; to repeat it and go further , to go backward. Use F to search backward.
@@ -20,7 +24,7 @@ https://vim-adventures.com
 # Editing
 - d + w deletes a word. But it cuts it so pressing p will paste it. SHIFT + P will paste previous. dd will delete the line.
 - d + 5 + w delete 5 words forward. d + 5 + b delete 5 words backward.
-- y + w yanks a word. yy will copy the line. p will paste below, SHIFT + P will paste above.
+- y + w yanks a word. yy will copy the line. p will paste below, SHIFT + p will paste above.
 - Hit = twice to fix indentation of a line.
 - CTRl + r to redo.
 - Press CTRL+O in insert mode to run normal mode commands.
@@ -49,6 +53,7 @@ https://vim-adventures.com
 
 # Replace Mode
 - SHIFT + R is replace mode.
+- CTRL + R is redo.
   
 # Registers
 In case we yanked mltiple times we can see all those using ```:reg``` command. It shows all the registers and their contents. These regsiters have all the actions that we perform. So to paste from register 3 we press ```"3P```. Similarly we can yank into specific register using ```"7Y```
