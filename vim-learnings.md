@@ -1,6 +1,9 @@
+https://vim-adventures.com
+
 # Navigation
 - H, J, K, L are used for navigation.
 - w to move one word foward and lands at start of the word. e to move one word foward and lands at end of the word. b to move back. 5 + w to jump 5 words.
+- 0 to move to start of a line $ to move at the end of a line. However 0 move to start of a line if there is nothing written there. ^ is used to move to start of written line. 
 - gg to go to start of the file. SHIFT + G to go to end of a file.
 - SHIFT + M to go to the middle section of visible screen.
   - SHIFT + M followed by ZZ can be used to scroll the document.
@@ -10,11 +13,12 @@
 - f followed by character to find. e.g. f + s finds the next s character we can hit ; to repeat it and go further , to go backward. Use F to search backward.
   - 4+f+s will find fourth occurance.
 - To search for a word under our cursor press *.
-- SHIFT+N to look for the previous match & N to go forward.
+- SHIFT + N to look for the previous match & N to go forward.
 - Use % to move to matching pair of parantheses.
 
 # Editing
 - d + w deletes a word. But it cuts it so pressing p will paste it. SHIFT + P will paste previous. dd will delete the line.
+- d + 5 + w delete 5 words forward. d + 5 + b delete 5 words backward.
 - y + w yanks a word. yy will copy the line. p will paste below, SHIFT + P will paste above.
 - CTRl + r to redo.
 - Press CTRL+O in insert mode to run normal mode commands.
