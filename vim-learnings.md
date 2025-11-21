@@ -12,6 +12,7 @@ https://vim-adventures.com
 # Finding
 - f followed by character to find. e.g. f + s finds the next s character we can hit ; to repeat it and go further , to go backward. Use F to search backward.
   - 4+f+s will find fourth occurance.
+  - You can use this to even find space to move quickly.
 - To search for a word under our cursor press *.
 - SHIFT + N to look for the previous match & N to go forward.
 - Use % to move to matching pair of parantheses.
