@@ -20,6 +20,7 @@ https://vim-adventures.com
 - d + w deletes a word. But it cuts it so pressing p will paste it. SHIFT + P will paste previous. dd will delete the line.
 - d + 5 + w delete 5 words forward. d + 5 + b delete 5 words backward.
 - y + w yanks a word. yy will copy the line. p will paste below, SHIFT + P will paste above.
+- Hit = twice to fix indentation of a line.
 - CTRl + r to redo.
 - Press CTRL+O in insert mode to run normal mode commands.
 - d + i + w to delete in word and takes the entire word regardless of position. action + motion + range. E.g. d + i + p to delete in paragraph. y + i + p yank in paragraph.
