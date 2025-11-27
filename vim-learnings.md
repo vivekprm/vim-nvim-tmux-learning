@@ -46,6 +46,7 @@ https://vim-adventures.com
   - Then using the arrow key and select until the last line
   - Now press Shift + I, which will put the editor in INSERT mode and then press #. This will add a hash to the first line.
   - Then press Esc (give it a second), and it will insert a # character on all other selected lines.
+  - SHIFT + Z + Z to quickly quit vim
 
 # Visual Mode
 - Press v for visual mode and then press w, w or e, e it keeps selecting, until you press closing operator e.g. d to delete the selection.
