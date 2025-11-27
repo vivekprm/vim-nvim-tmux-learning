@@ -29,7 +29,8 @@ https://vim-adventures.com
 - CTRl + r to redo.
 - Press CTRL+O in insert mode to run normal mode commands.
 - d + i + w to delete in word and takes the entire word regardless of position. action + motion + range. E.g. d + i + p to delete in paragraph. y + i + p yank in paragraph.
-- Install [text objects plugin](https://github.com/kana/vim-textobj-function) to e.g. delete in function using d + i + f
+- d + i + " delete things inside the quote. It finds the next quote and delete things from there.
+- Install [text objects plugin](https://github.com/kana/vim-textobj-function) to e.g. delete in function using d + i + f. 
 - d + a + w to delete around word.
 - c + i + ( change in parantheses. d + i + w to delete and cool thing is you don't have to be in the parantheses. Same works with ".
 - From insert mode press Ctrl+O, 0 beginning of line, Ctrl+O, $ end of line
@@ -47,12 +48,12 @@ https://vim-adventures.com
   - Then press Esc (give it a second), and it will insert a # character on all other selected lines.
 
 # Visual Mode
-- Press v for visual mode and then press w, w it keeps selecting, until you press closing operator e.g. d to delete the selection.
+- Press v for visual mode and then press w, w or e, e it keeps selecting, until you press closing operator e.g. d to delete the selection.
 - Press SHIFT + V t0 select the entire line. Press 6 + k to select 6 lines above, 6 + j to select 6 lines below and press d to delete. Or press 6 + D + K to do the same.
 - CTRL + V to select a visual block. And followed by e.g. > to indent.
 
 # Replace Mode
-- SHIFT + R is replace mode.
+- SHIFT + R is replace mode. It's useful when you want to write over existing text.
 - CTRL + R is redo.
   
 # Registers
