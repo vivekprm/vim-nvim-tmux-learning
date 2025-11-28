@@ -1,9 +1,15 @@
 https://vim-adventures.com
 
+COMMAND + COUNT + MOTION
+d,c,y,v   5,6,7   j,k,l,w
+d 2f (
+
 # Navigation
 - H, J, K, L are used for navigation.
 - w to move one word foward and lands at start of the word. e to move one word foward and lands at end of the word. b to move back. 5 + w to jump 5 words.
-- 0 to move to start of a line $ to move at the end of a line. However 0 move to start of a line if there is nothing written there. ^ is used to move to start of written line. 
+- 0 or _ to move to start of a line $ to move at the end of a line. However 0 move to start of a line if there is nothing written there. ^ is used to move to start of written line.
+- use f and any character to jump to that character. Use t and any character to jump upto that character but not on that character. Use , (to go backward) and ; (to go forward) to repeat.
+- Use F and T to move backward.
 - gg to go to start of the file. SHIFT + G to go to end of a file.
 - SHIFT + M to go to the middle section of visible screen.
   - SHIFT + M followed by ZZ can be used to scroll the document.
@@ -12,6 +18,9 @@ https://vim-adventures.com
 - SHFT + M to move to middle of the visible screen.
 - zz to also scroll and stay in the middle fo visible screen.
 - Hitting % moves to the matching counter part of any brace.
+- I goes to beginning of the line and switch to insert mode.
+- A goes to end of the line and switch to insert mode.
+- o make a new line below and goes to insert mode. O make a new line above and goes to insert mode.
 
 # Finding
 - f followed by character to find. e.g. f + s finds the next s character we can hit ; to repeat it and go further , to go backward. Use F to search backward.
@@ -89,6 +98,83 @@ days =  [
 ]
 ```
 For that we need to add quotes around each word and put comma. It will be a lot of work if we do it line by line. So using macro we can record and replay an action over and over. To start recording a macro we type ```q``` followed by the register we want to record into. e.g. ```qh``` will record the macro in register h. Now we perform the action on one line in such a way, so that it can we replayed. To replay recorded macro ```@h```. To apply the macro in next 5 lines ```5@h```
+
+# Splitting The Window
+In vim a buffer contains the window. If we divide the vim editor into multiple windows. buffer id is same but window id is different.
+
+We can split vim window vertically using ```:vsp``` or ```:vsplit```. It opens the same file in other window. We can specify ```:vsp filename``` to open other file.
+To create a horizontal split, you can use ```:sp``` or ```:split```
+
+we can use:
+
+Ctrl + w+ w -> Switch to the next split (in the order of creation of those splits).
+Ctrl + w + h -> Move to the left split.
+Ctrl + w + l -> Move to the right split.
+Ctrl + w + j -> Move to the below split.
+Ctrl + w + k -> Move to a upper split.
+
+If we want to use keyboard shortcut, use below shortcuts.
+Ctrl + w + v -> Create a vertical split.
+Ctrl + w+ s -> Create a horizontal split.
+
+To open a file use ```:e filename```
+
+Ctrl + w + r -> Swap the two splits(either horizontal or vertical)
+Ctrl + w + H -> Move the split to the left ( Ctrl + w + Shift + h).
+Ctrl + w + J -> Move the split down ( Ctrl + w + Shift + j).
+Ctrl + w + K -> Move the split up ( Ctrl + w + Shift + k). .
+Ctrl + w + L -> Move the split to the right ( Ctrl + w + Shift + l).
+
+We can resize the splits as per the requirement and remove the equality in those splits. We have a couple of options to do this:
+
+Ctrl + w + + -> Increase the height of the current split.
+Ctrl + w + - -> Decrease the height of the current split.
+Ctrl + w + > -> Increase the width of the current split.
+Ctrl + w + < -> Decrease the width of the current split.
+Ctrl + w + = -> Make the splits equal in width and height.
+
+We can also use ```:resize {number}``` to manually set the size of the horizontal split and ```:vertical resize {number}``` to manually set the size of the vertical split. 
+We can also use Ctrl + w + _ to minimize all the window split except the current one.
+
+Ctrl + w + c -> Close the current split.
+Ctrl + w + o -> Quit all other splits except the current one.
+
+If we split vim buffer into multiple windows and add a file in first buffer it updates it in all the other buffers. Because eventhough windows are different buffer is same.
+
+# File Explorer & Navigation
+Use telescope, harpoon (stick 2, 3 files) to switch between files use netrw to add, delete files etc from inside vim.
+
+Netrw is a plugin that comes bundled with vim.
+```:Explore``` command with no arguments will show the directory of the file we are editing. If hidden is enabled Netrw will always occupy the whole window.
+```Hexplore:``` Will create a horizontal split and show the directory in the lower window. The variant with an ! will show the directory in the opposite side.
+```Vexplore:``` Will create a vertical split and show the directory on the left side. The variant with an ! will show the directory in the opposite side.
+```Sexplore:``` Will create a horizontal split and show the directory in the upper window. The variant with an ! will create a vertical split and show the directory on the left side.
+```Texplore```: Will create a new tabpage to show the directory.
+```Lexplore```: It works almost like Vexplore, but Lexplore will open a file on the window where we called the command. It will also work as way to toggle a Netrw window. You can watch it in action in this demo.
+
+Enter: Opens a directory or a file.
+-: Go up to the parent directory.
+u: Go back to the previous directory in the history.
+gb: Jump to the most recent directory saved on the "Bookmarks". 
+To create a bookmark we use mb.
+
+## File Operations
+p: Opens a preview window.
+<C-w>z: Ctrl + w and then z. Closes the preview window.
+
+gh: Toggles the hidden files.
+
+%: Creates a file. Well... it actually doesn't, it just gives you the opportunity to create one. When you press % vim will ask the name you want to give the file and then it lets you edit it. After entering the name you have to save the file (using :write) to create it.
+
+R: Renames a file
+mt: Assign the "target directory" used by the move and copy commands.
+mf: Marks a file or directory. Any action that can be performed on multiple files depend on these marks. So if you want to copy, move or delete files, you need to mark them.
+mc: Copy the marked files in the target directory.
+mm: Move the marked files to the target directory.
+mx: Runs an external command on the marked files.
+D: Deletes a file or an empty directory. vim will not let us delete a non-empty directory. I'll show how to bypass this later on.
+d: Creates a directory.
+
 
 # References:
 https://www.baeldung.com/linux/vim-registers
