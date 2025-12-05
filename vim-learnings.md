@@ -1,6 +1,6 @@
 https://vim-adventures.com
 
-COMMAND + COUNT + MOTION
+COMMAND + COUNT + MOTION  
 d,c,y,v   5,6,7   j,k,l,w
 d 2f (
 
