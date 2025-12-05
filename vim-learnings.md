@@ -175,6 +175,11 @@ mx: Runs an external command on the marked files.
 D: Deletes a file or an empty directory. vim will not let us delete a non-empty directory. I'll show how to bypass this later on.
 d: Creates a directory.
 
+# Running Commands
+```:! <command>``` to run any command from vim.
+```:term``` opens teminal inside vim.
+```:e filename``` opens file.
+```:ex <directory>``` opens directory.
 
 # References:
 https://www.baeldung.com/linux/vim-registers
