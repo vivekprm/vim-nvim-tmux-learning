@@ -181,5 +181,10 @@ d: Creates a directory.
 ```:e filename``` opens file.
 ```:ex <directory>``` opens directory.
 
+```:bprevious``` open previous buffer.
+```:bnext``` open next buffer.
+```:bdelete``` deletes current buffer.
+
+To reload vim ```:so %```
 # References:
 https://www.baeldung.com/linux/vim-registers
