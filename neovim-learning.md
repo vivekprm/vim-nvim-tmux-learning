@@ -4,6 +4,8 @@ Install neovim and run ```nvim``` command to start.
 - To switch between buffers ```<CTRL + 6>```
 - To go back to previous edit location ```<CTRL + O>```
 - To go to start of a method ```[m``` & to go to end of a method ```]m```
+- CTRL + ^ to go back toggle between buffer
+- CTRL + o goes one back in jumplist
 
 # Configure neovim
 Create init.lua file to configure Neovim
