@@ -7,6 +7,7 @@ Install neovim and run ```nvim``` command to start.
 - CTRL + ^ to go back toggle between buffer
 - CTRL + o goes one back in jumplist
 - CTRL + q to move things to quicklist. Then :cnext and :cprev to move inside quicklist.
+- SHIFT + K shows the type information
 
 # Configure neovim
 Create init.lua file to configure Neovim
