@@ -9,7 +9,8 @@ Install neovim and run ```nvim``` command to start.
 - CTRL + q to move things to quicklist. Then :cnext and :cprev to move inside quicklist.
 - SHIFT + K shows the type information
 	- CTRL + o to go to the type
-	- CTRL + i to come back to previous	 	
+	- CTRL + i to come back to previous
+ - CTRL + / gives contextual help.E.g. When we are in telescope searching for file we see help related to it.	
 
 # Configure neovim
 Create init.lua file to configure Neovim
