@@ -10,7 +10,8 @@ Install neovim and run ```nvim``` command to start.
 - SHIFT + K shows the type information
 	- CTRL + o to go to the type
 	- CTRL + i to come back to previous
- - CTRL + / gives contextual help.E.g. When we are in telescope searching for file we see help related to it.	
+ - CTRL + / gives contextual help.E.g. When we are in telescope searching for file we see help related to it.
+ - We can check what a keymap does using :lua <command set in keymap>
 
 # Configure neovim
 Create init.lua file to configure Neovim
