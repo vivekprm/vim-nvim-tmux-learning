@@ -12,6 +12,7 @@ Install neovim and run ```nvim``` command to start.
 	- CTRL + i to come back to previous
  - CTRL + / gives contextual help.E.g. When we are in telescope searching for file we see help related to it.
  - We can check what a keymap does using :lua <command set in keymap>
+ - CTRL + N to cycle through lsp suggestions and CTRL + y to accept.
 
 # Configure neovim
 Create init.lua file to configure Neovim
